@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/authenticated.html}">
+<head>
+<meta charset="UTF-8">
+<title>Invoice Edit</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+			<div class="card">
+				<div class="card-header">
+					<h4 th:text="${invoiceEditForm.invoiceForm.id} eq 0 ? 'New Invoice' : 'Edit Invocie'" > </h4>
+				</div>
+				<div class="card-body">
+
+					<form th:action="@{/user/invoice/save}" th:object="${invoiceForm}" method="post" id="invoiceForm" class="row">
+
+						<div class="col-2">
+							<input type="date" th:field="*{date}" class="form-control" />
+						</div>
+						
+						<div class="col">
+							<select th:field=*{customer} class="form-select">
+								<option value="">Select Customer</option>
+								<option  th:each="customer : ${customerList}" th:text="${customer.name}" th:value="${customer.id}"></option>
+							</select>
+						</div>
+
+						<div class="col">
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="bi-tag" ></i>
+								</span>
+								<input type="text" th:field="*{category}" class="form-control"
+								placeholder="Enter Category Name" />
+							</div>
+						</div>	
+						
+					
+					</form>
+					
+					<form th:action="@{/user/invoice/addItem}" method="post" th:object="${invoiceDetailForm}" class="row mt-3">
+						
+						<div class="col">
+							<label for="item" class="form-label my-1">Item Name</label>
+							<input type="text" th:field="*{item}" class="form-control" placeholder="Enter Item Name" />
+						</div>
+						
+						<div class="col">
+							<label for="brand" class="form-label my-1">Brand</label>
+							<input type="text" th:field="*{brand}" class="form-control" placeholder="Enter Brand Name"/>
+						</div>
+							
+						
+						<div class="col">
+							<label for="unitPrice" class="form-label my-1">Unit Price</label>
+							<input type="number" th:field="*{unitPrice}" class="form-control" placeholder="Enter Unit Price"/>
+						</div>
+						
+						<div class="col">
+							<label for="quantity" class="form-label my-1">Quantity</label>
+							<input type="number" th:field="*{quantity}" class="form-control" placeholder="Enter Quantity"/>
+						</div>
+						
+						<div class="col mt-4">
+							<button type="submit" class="btn btn-primary me-2" >Add Item</button>
+							<a href="#" id="invoiceBtn" class="btn btn-success px-3" >Save</a>
+						</div>
+						
+					</form>
+
+				</div>
+			</div>
+			
+			<table class="table table-striped mt-4" >
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Item</th>
+						<th>Brand</th>
+						<th class="text-end" >Unit Price</th>
+						<th class="text-end">Quantity</th>
+						<th class="text-end">Price</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="item, rowNum : ${invoiceEditForm.validItems}" class="align-middle" >
+						<td th:text="${rowNum.index + 1}" ></td>
+						<td th:text="${item.item}" ></td>
+						<td th:text="${item.brand}" ></td>
+						<td th:text="${item.unitPrice}" class="text-end"></td>
+						<td th:text="${item.quantity}" class="text-end"></td>
+						<td th:text="${item.unitPrice * item.quantity}" class="text-end"></td>
+						<td class="text-center">
+							<a th:href="@{'/user/invoice/remove?index=' + ${rowNum.index}}">
+								<i class="bi-trash" ></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+	</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

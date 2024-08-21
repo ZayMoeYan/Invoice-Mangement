@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{/layouts/authenticated.html}" >
+<head>
+<meta charset="UTF-8">
+<title>Customer List</title>
+</head>
+<body>
+
+	<div layout:fragment="content" >
+		<div class="card">
+			<div class="card-header">
+				<h5 class="fw-bold" >Customer Management</h5>
+			</div>
+			<div class="card-body">
+				
+				<form action="#"  class="row" >
+					
+					<div class="col">
+						<input type="date" th:value="${param.dateFrom}" name="dateFrom" class="form-control" />
+					</div>
+					
+					<div class="col">
+						<input type="date" th:value="${param.dateTo}" name="dateTo" class="form-control" />
+					</div>
+					
+					<div class="col">
+						<input type="text" th:value="${param.name}" name="name" class="form-control" placeholder="Enter Name" />
+					</div>
+					
+					<div class="col">
+						<input type="text" name="phone" th:value="${param.phone}" class="form-control" placeholder="Enter Phone" />
+					</div>
+					
+					<div class="col">
+						<input type="text" name="keyword" th:value="${param.keyword}" class="form-control" placeholder="Enter Township/City" />
+					</div>
+					
+					<div class="col">
+						<button type="submit" class="btn btn-info" ><i class="bi-search" ></i>Search</button>
+						<a th:href="@{/user/customer/edit}" class="btn btn-danger"><i class="bi-plus"></i>Add</a>
+					</div>
+				
+				</form>
+				
+			</div>
+			
+		</div>
+		
+		<table class="table table-striped mt-4">
+			<thead>
+				<tr>
+					<th>Purchase Date</th>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Address</th>
+					<th>Township</th>
+					<th>City</th>
+				
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="customer : ${customerList}" >
+					<td th:each="invoice : ${customer.invoices}"
+						th:text="${invoice != null && invoice.customer.id == customer.id ? invoice.date : 'No Invoice'}" ></td>
+					<td th:if="${#lists.isEmpty(customer.invoices)}" >No Invoice</td>	
+					<td th:text="${customer.name}" ></td>
+					<td th:text="${customer.phone}" ></td>
+					<td th:text="${customer.email}" ></td>
+					<td th:text="${customer.address.building}" ></td>
+					<td th:text="${customer.address.township}" ></td>
+					<td th:text="${customer.address.city}" ></td>
+					
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{/layouts/authenticated.html}" >
+<head>
+<meta charset="UTF-8">
+<title>User List</title>
+</head>
+<body>
+	
+	<div layout:fragment="content" >
+		<div class="card">
+			<div class="card-header">
+				<h5 class="fw-bold">User List</h5>
+			</div>
+			<div class="card-body">
+				<form class="row">
+				
+					<div class="col">
+						<select name="role" class="form-select">
+							<option value="">All Role</option>
+							<option th:each="role : ${roles}" th:text="${role}" th:value="${role}" ></option>
+						</select>
+					</div>
+					
+					<div class="col">
+						<input type="text" name="name" class="form-control" placeholder="Enter Name" />
+					</div>
+					
+					<div class="col">
+						<input type="text" name="phone" class="form-control" placeholder="Enter Phone" />
+					</div>
+					
+					<div class="col">
+						<input type="text" name="email" class="form-control" placeholder="Enter Email" />
+					</div>
+					
+					<div class="col">
+						<button type="submit" class="btn btn-info" ><i class="bi-search" ></i>Search</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<table class="table table-striped mt-4">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Status</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th class="text-center" >Change Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="align-middle" th:each="user : ${userList}" >
+					<td th:text="${user.id}" ></td>
+					<td th:text="${user.name}" ></td>
+					<td th:text="${user.status == true ? 'Active' : 'Suspend'}" ></td>
+					<td th:text="${user.phone}" ></td>
+					<td th:text="${user.email}" ></td>
+					<td class="text-center" >
+						<a th:href="@{'/admin/users/change?id=' + ${user.id}}" >
+							<i th:if="${user.status == true}" class="bi-trash" ></i>
+							<i th:unless="${user.status == true}" class="bi-check-lg" ></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		
+	</div>
+	
+</body>
+</html>

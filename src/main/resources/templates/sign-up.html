@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{layouts/anonymous.html}" >
+<head>
+<meta charset="UTF-8">
+<title>Sign Up</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		
+		<div class="container bg-dark p-3">
+				
+			<h3 class="text-light mb-3" >Invoice Management</h3>
+			<form th:action="@{/}" method="post" th:object="${user}" >
+				
+				<div class="mb-3" >
+					<label for="name" class="form-label text-light">User Name</label>
+					<div class="input-group">
+						<span class="input-group-text" >
+							<i class="bi-person" ></i>
+						</span>
+						<input type="text" th:field="*{name}" class="form-control" placeholder="Enter User Name" />
+					</div>
+				</div>
+				
+				<div class="mb-3" >
+					<label for="phone" class="form-label text-light">Phone</label>
+					<div class="input-group">
+						<span class="input-group-text" >
+							<i class="bi-telephone" ></i>
+						</span>
+						<input type="text" th:field="*{phone}" class="form-control" placeholder="Enter Phone Number" />
+					</div>
+				</div>
+				
+				<div class="mb-3" >
+					<label for="email" class="form-label text-light">Email</label>
+					<div class="input-group">
+						<span class="input-group-text" >
+							<i class="bi-envelope" ></i>
+						</span>
+						<input type="email" th:field="*{email}" class="form-control" placeholder="Enter Email Address" />
+					</div>
+				</div>
+				
+				<div class="mb-3" >
+					<label for="loginId" class="form-label text-light">Login Id</label>
+					<div class="input-group">
+						<span class="input-group-text" >
+							<i class="bi-lock" ></i>
+						</span>
+						<input type="text" th:field="*{loginId}" class="form-control" placeholder="Enter Login Id" />
+					</div>
+				</div>
+				
+				<div >
+					<label for="password" class="form-label text-light">Password</label>
+					<div class="input-group">
+						<span class="input-group-text" >
+							<i class="bi-key" ></i>
+						</span>
+						<input type="password" th:field="*{password}" class="form-control" placeholder="Enter Password" />
+					</div>
+				</div>
+				
+				<div class="mt-5" >
+					<div class="d-grid gap-2" >
+						<button type="submit" class="btn btn-outline-info" >Create New Account</button>
+						<a th:href="@{/}" class="btn btn-outline-warning" >Back To Login</a>
+					</div>
+				</div>
+				
+			
+			</form>
+			
+		</div>
+		
+	</div>
+
+</body>
+</html>

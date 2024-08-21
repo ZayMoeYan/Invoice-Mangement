@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>Modal</title>
+</head>
+<body>
+	
+
+		<div id="changePassword" th:fragment="changePassword" class="modal fade" >
+			
+			<div class="modal-dialog">
+			
+				<form th:action="@{/user/change-pass}" method="post" class="modal-content">
+				
+					<input type="hidden" name="loginId" th:value="${#authentication.name}" />
+				
+					<div class="modal-header">
+						<h5><i class="bi-gear me-2" ></i>Change password</h5>
+					</div>
+					
+					<div class="modal-body">
+
+								<div class="row mb-4">
+									<label for="">Old Password</label>
+									<div class="input-group">
+										<span class="input-group-text">
+											<i class="bi-key" ></i>
+										</span>
+										<input type="password" name="oldPassword" class="form-control" />
+									</div>
+								</div>
+								
+								<div class="row">
+									<label for="">New Password</label>
+									<div class="input-group">
+										<span class="input-group-text">
+											<i class="bi-key" ></i>
+										</span>
+										<input type="password" name="newPassword" class="form-control" />
+									</div>
+								</div>
+	
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" ><i class="bi-repeat me-1" ></i>Change</button>
+						</div>
+					
+				</form>
+				
+			</div>
+			
+		</div>
+	
+	
+</body>
+</html>

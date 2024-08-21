@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{layouts/anonymous.html}" >
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body>
+	
+	<div layout:fragment="content" >
+		<div class="container bg-dark p-3">
+				
+			<h3 class="text-light mb-3" >Invoice Management</h3>
+			<form th:action="@{/login}" method="post" >
+				
+				<div class="mb-3" >
+					<label for="loginId" class="form-label text-light">Login Id</label>
+					<div class="input-group">
+						<span class="input-group-text" >
+							<i class="bi-lock" ></i>
+						</span>
+						<input type="text" name="username" class="form-control" placeholder="Enter Login Id" />
+					</div>
+				</div>
+				
+				<div class="mb-4" >
+					<label for="password" class="form-label text-light">Password</label>
+					<div class="input-group">
+						<span class="input-group-text" >
+							<i class="bi-key" ></i>
+						</span>
+						<input type="password" name="password" class="form-control" placeholder="Enter Password" />
+					</div>
+				</div>
+				
+				<div class="d-grid gap-2" >
+					<button type="submit" class="btn btn-outline-info" >Login To Your Account</button>
+					<a th:href="@{/sign-up}" class="btn btn-outline-warning" >SignUp To New Account</a>
+				</div>
+			
+			</form>
+			
+		</div>
+	</div>
+	
+</body>
+</html>

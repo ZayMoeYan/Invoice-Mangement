@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{/layouts/authenticated.html}" ><head>
+<meta charset="UTF-8">
+<title>Customer Edit</title>
+</head>
+<body>
+	
+	<div layout:fragment="content" class="border p-4" >
+		
+		<h4 class="mb-3" >New Customer</h4>
+		<hr />
+		
+		<form th:action="@{/user/customer}" th:object="${customer}" method="post">
+			
+			<div class="row">
+				
+				<div class="col">
+					<label for="name" class="form-label">Name</label>
+					<div class="input-group">
+						<input type="text"  class="form-control" th:field="*{name}" placeholder="Enter Customer Name" />
+						<span class="input-group-text" >
+							<i class="bi-x" ></i>
+						</span>
+					</div>
+				</div>
+				
+				<div class="col">
+					<label for="name" class="form-label">Phone</label>
+					
+					<div class="input-group">
+						<input type="text"  class="form-control" th:field="*{phone}" placeholder="Enter Customer Phone"/>
+						<span class="input-group-text" >
+							<i class="bi-x" ></i>
+						</span>
+					</div>
+				</div>
+				
+				
+				<div class="col">
+					<label for="name" class="form-label">Email</label>
+					
+					<div class="input-group">
+						<input type="text"  class="form-control" th:field="*{email}" placeholder="Enter Customer Email" />
+						<span class="input-group-text" >
+							<i class="bi-x" ></i>
+						</span>
+					</div>
+				</div>	
+				
+				<div class="col">
+					<label for="" class="form-label">Level</label>
+					<select th:field="*{level}" class="form-select">
+						<option value="">Select Level</option>
+						<option th:each="level : ${customerLevels}" th:text="${level}"  th:value="${level}"></option>
+					</select>
+				</div>
+			
+			</div>
+
+			
+			<div class="row mt-4">
+			
+				
+				
+				<div class="col">
+					<label for="name" class="form-label">Address</label>
+					
+					<div class="input-group">
+						<input type="text"  class="form-control" th:field="*{address.building}" placeholder="Enter Customer Address" />
+						<span class="input-group-text" >
+							<i class="bi-x" ></i>
+						</span>
+					</div>
+				</div>
+				
+				<div class="col">
+					<label for="name" class="form-label">Township</label>
+					
+					<div class="input-group">
+						<input type="text" class="form-control" th:field="*{address.township}" placeholder="Enter Township Name" />
+						<span class="input-group-text" >
+							<i class="bi-x" ></i>
+						</span>
+					</div>
+				</div>
+				
+				<div class="col">
+					<label for="name" class="form-label" >City</label>
+					
+					<div class="input-group">
+						<input type="text" class="form-control" th:field="*{address.city}" placeholder="Enter City Name" />
+						<span class="input-group-text" >
+							<i class="bi-x" ></i>
+						</span>
+					</div>
+				</div>
+				
+				<div class="col">
+					<button type="submit" class="btn btn-primary mt-4 ms-4" ><i class="bi-person me-1" ></i>Save Customer</button>
+				</div>
+					
+			</div>
+						
+		</form>
+
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/authenticated.html}">
+<head>
+<meta charset="UTF-8">
+<title>Invoice Detail</title>
+</head>
+<body>
+
+	<div layout:fragment="content" class="border p-3 bg-light ">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="fw-bold" >Invoice Detail</h5>
+				</div>
+				<div class="card-body">
+
+					<div class="row">
+
+						<div class="col">
+							<div class="input-group">
+								<span class="input-group-text bg-dark text-light">Purchase Date</span>
+								<span th:text="${invoice.invoiceForm.date}" class="form-control"></span>
+							</div>						
+						</div>
+
+						<div class="col">
+							<div class="input-group">
+								<span class="input-group-text  bg-dark text-light">Customer</span>
+								<span  th:text="${invoice.invoiceForm.customer.name}"  class="form-control"></span>
+							</div>						
+						</div>
+						
+						<div class="col">
+						<div class="input-group">
+								<span class="input-group-text  bg-dark text-light">Customer</span>
+								<span  th:text="${invoice.invoiceForm.category}"  class="form-control"></span>
+							</div>						
+						</div>
+						
+						
+						<div class="col">
+							<a th:href="@{'/user/invoice/edit?id=' + ${invoice.invoiceForm.id}}" class="btn btn-outline-primary" >Edit Invoice</a>
+							<a th:href="@{'/user/invoice/delete?id=' + ${invoice.invoiceForm.id}}" class="btn btn-outline-danger" >Delete Invoice</a>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+			
+			<table class="table mt-4" >
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Item</th>
+						<th>Brand</th>
+						<th class="text-end" >Unit Price</th>
+						<th class="text-end">Quantity</th>
+						<th class="text-end">Price</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="detail : ${invoice.detailForm}" >
+						<td th:text="${detail.id}" ></td>
+						<td th:text="${detail.item}" ></td>
+						<td th:text="${detail.brand}" ></td>
+						<td th:text="${detail.unitPrice}" class="text-end"></td>
+						<td th:text="${detail.quantity}" class="text-end"></td>
+						<td th:text="${detail.unitPrice * detail.quantity}" class="text-end"></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="4" class="text-end fw-bold" >Total</td>
+						
+						<td th:text="${invoice.totalQuantity}" class="text-end fw-bold"  ></td>
+						<td th:text="${invoice.total}" class="text-end fw-bold" ></td>
+					</tr>
+				</tfoot>
+			</table>
+			
+	</div>
+
+</body>
+</html>
